@@ -22,6 +22,7 @@ import Launch from "./Launch";
 import History from "./History";
 import Upcoming from "./Upcoming";
 
+
 const styles = () => ({
   content: {
     display: "flex",
@@ -51,6 +52,7 @@ const AppLayout = props => {
   const onAbortSound = () => sounds.abort && sounds.abort.play();
   const onFailureSound = () => sounds.warning && sounds.warning.play();
 
+
   const {
     launches,
     isPendingLaunch,
@@ -58,6 +60,7 @@ const AppLayout = props => {
     abortLaunch,
   } = useLaunches(onSuccessSound, onAbortSound, onFailureSound);
 
+  console.log('launches in layout: ', launches)
   const planets = usePlanets();
   
   return <div className={classes.content}>
