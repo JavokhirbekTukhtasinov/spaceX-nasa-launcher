@@ -19,5 +19,8 @@
     "jest": "^28.1.2",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.18"
+  },
+  "devDependencies": {
+    "supertest": "^6.2.4"
   }
 }
