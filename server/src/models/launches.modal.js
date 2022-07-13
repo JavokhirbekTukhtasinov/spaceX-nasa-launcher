@@ -26,13 +26,28 @@ const addNewLaunch = (launch) => {
 }
 
 
+const existsLaunchId = (id) => {
+    return launches.has(id);
+}
+
+const deleteLaunch = async (id) => {
+ const aborted = launches.get(id);
+ aborted.upcoming = false;
+ aborted.success= false;
+ return aborted;
+}
+
+
 launches.set(launch.flightNumber, launch);
 const getAllLaunches = () => {
     return Array.from(launches.values());
 }
 
+
 module.exports = { 
     addNewLaunch,
-    getAllLaunches
+    getAllLaunches,
+    existsLaunchId,
+    deleteLaunch
 }
  

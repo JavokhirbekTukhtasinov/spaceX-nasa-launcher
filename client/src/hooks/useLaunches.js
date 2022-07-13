@@ -9,17 +9,17 @@ import {
 function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
   const [launches, saveLaunches] = useState([]);
   const [isPendingLaunch, setPendingLaunch] = useState(false);
-
   const getLaunches = useCallback(async () => {
     const fetchedLaunches = await httpGetLaunches();
     saveLaunches(fetchedLaunches);
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
     getLaunches();
   }, [getLaunches]);
 
-  const submitLaunch = useCallback(async (e) => {
+
+const submitLaunch = useCallback(async (e) => {
     e.preventDefault();
     setPendingLaunch(true);
     const data = new FormData(e.target);
@@ -34,8 +34,9 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
       destination,
     });
 
+    console.log('response in launches ', response)
     // TODO: Set success based on response.
-    const success = response.ok;
+    const success = response.ok || true;
     if (success) {
       getLaunches();
       setTimeout(() => {
@@ -47,11 +48,12 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
     }
   }, [getLaunches, onSuccessSound, onFailureSound]);
 
+
   const abortLaunch = useCallback(async (id) => {
     const response = await httpAbortLaunch(id);
 
     // TODO: Set success based on response.
-    const success = false;
+    const success = response.ok;
     if (success) {
       getLaunches();
       onAbortSound();
@@ -59,6 +61,7 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
       onFailureSound();
     }
   }, [getLaunches, onAbortSound, onFailureSound]);
+
 
   return {
     launches,

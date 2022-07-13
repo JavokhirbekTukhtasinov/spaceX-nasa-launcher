@@ -53,16 +53,15 @@ const AppLayout = props => {
   const onFailureSound = () => sounds.warning && sounds.warning.play();
 
 
-  const {
+
+const {
     launches,
     isPendingLaunch,
     submitLaunch,
     abortLaunch,
   } = useLaunches(onSuccessSound, onAbortSound, onFailureSound);
-
-  console.log('launches in layout: ', launches)
   const planets = usePlanets();
-  
+
   return <div className={classes.content}>
     <Header onNav={animateFrame} />
     <Centered className={classes.centered}>

@@ -14,6 +14,8 @@ app.use('/planets', planetsRouter)
 const launchesRouter = require('./routes/launches.router')
 app.use('/launches', launchesRouter)
 
+
+
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 })
