@@ -3,17 +3,18 @@ const app = express()
 const cors = require('cors')
 const path = require('path');
 const morgan = require('morgan')
+const api = require('./routes/api')
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 
+
 app.use(morgan('combined'))
 app.use(express.static(path.join(__dirname, '..', 'public')))
-const planetsRouter = require('./routes/planets.router')
-app.use('/planets', planetsRouter)
-const launchesRouter = require('./routes/launches.router')
-app.use('/launches', launchesRouter)
 
+
+app.use('/v1', api);
 
 
 app.get('/*', (req, res) => {

@@ -26,12 +26,12 @@ const submitLaunch = useCallback(async (e) => {
     const launchDate = new Date(data.get("launch-day"));
     const mission = data.get("mission-name");
     const rocket = data.get("rocket-name");
-    const destination = data.get("planets-selector");
+    const target = data.get("planets-selector");
     const response = await httpSubmitLaunch({
       launchDate,
       mission,
       rocket,
-      destination,
+      target,
     });
 
     console.log('response in launches ', response)

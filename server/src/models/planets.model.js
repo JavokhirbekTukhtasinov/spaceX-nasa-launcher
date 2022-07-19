@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path')
 const {parse} = require('csv-parse');
 
+const planets = require('../schemas/planets.schema')
+
 const habitablePlanets = [];
 
 
@@ -20,24 +22,48 @@ const loadPlanetsData = () => {
           comment: '#',
           columns: true,
         }))
-        .on('data', (data) => {
-          if (isHabitablePlanet(data)) {
-            habitablePlanets.push(data);
+        .on('data', async (data) => {
+          if (isHabitablePlanet(data)) {    
+           await savePlanet(data)
           }
         })
         .on('error', (err) => {
             reject(err)
           console.log(err);
         })
-        .on('end', () => {
-          resolve(habitablePlanets)
-          console.log(`${habitablePlanets.length} habitable planets found!`);
+        .on('end', async () => {
+          const countOfPlanets = getAllPlanetsFromDb.length
+          console.log(`${countOfPlanets} habitable planets found!`);
+          resolve()
         });
     })
 }
 
 
+
+
+const getAllPlanetsFromDb = async(req, res) => {
+  return await planets.find({})
+}
+
+
+const savePlanet = async(palnet) => {
+  try {
+  await  planets.updateOne({
+      keplerName: palnet.kepler_name
+    }, {
+      keplerName: palnet.kepler_name,
+    },
+    {
+      upsert: true
+    } 
+    )
+  }catch(err){
+    console.log(err)
+  }
+}
+
   module.exports = {
     loadPlanetsData,
-    planets: habitablePlanets
+    getAllPlanetsFromDb
   }

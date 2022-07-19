@@ -1,8 +1,8 @@
 
-const {planets} = require('../models/planets.model')
+const {getAllPlanetsFromDb} = require('../models/planets.model')
 
 const getAllPlanets = async(req, res) => {
-  return res.status(200).json(planets)
+  return res.status(200).json(await getAllPlanetsFromDb())
 }
 
 
