@@ -4,6 +4,9 @@ const app = require('./app')
 const {loadPlanetsData} = require('./models/planets.model')
 const {loadLaunchesData} = require('./models/launches.modal')
 const {connectMongo} = require('./services/mongo')
+require('dotenv').config();
+
+
 
 const server = http.createServer(app)
 

@@ -6,7 +6,6 @@ const getPagination = (query) => {
     return { limit, offset };
 }
 
-
 module.exports = {
     getPagination
 };

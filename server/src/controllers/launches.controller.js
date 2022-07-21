@@ -17,6 +17,8 @@ const addNewLaunches = async (req, res) => {
         error: 'Missing required field'
     })
   }
+
+
   launch.launchDate = new Date(launch.launchDate);
 
   if(isNaN(launch.launchDate)) {
@@ -28,6 +30,7 @@ const addNewLaunches = async (req, res) => {
      await scheduleNewLaunch(launch);
   return res.status(201).json(launch) 
 }
+
 
 
 const abortLaunch = async (req, res) => {
