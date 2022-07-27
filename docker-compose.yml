@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    deploy: 
+      build: 
+        context: .
+        dockerfile: Dockerfile
+      image: nasa-app
+      container_name: nasa-app
+      restart: unless-stopped
